@@ -1,0 +1,19 @@
+{
+  "name": "crudmern",
+  "version": "1.0.0",
+  "description": "crud",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Bharath",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-validation": "^4.1.0",
+    "mongoose": "^6.7.3"
+  }
+}
