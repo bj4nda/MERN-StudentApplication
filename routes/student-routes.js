@@ -8,7 +8,7 @@ const {validate} = require('express-validation');
 const getStudents = router.get('/', studentController.getStudents);
 
 
-const sendStudents = router.post('/',   studentController.addStudents);
+const sendStudents = router.post('/', studentController.addStudents);
 
 const getStudentsById = router.get('/:id', studentController.getStudentsById);
 

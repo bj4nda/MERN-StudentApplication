@@ -3,6 +3,7 @@ const studentValidations = require('../validations/students');
 const {validateAsync} = require('express-validation');
 
 const getStudents = async(req, res, next) => {
+
     let students = await Student.find();
         if(!students) {
             return res.status(404).json({message: 'student not found'});
@@ -24,13 +25,22 @@ const addStudents =  async(req, res, next) => {
         studentResults: req.body.studentResults,
     })
 
-    await student.save();
+    student = await student.save();
+    if(!student) {
+        return res.status(500).json({message: "cannot save student"});
+    }
     res.status(200).json("success student successfully added");
+    next();
 }
 
 
 const getStudentsById = async(req, res, next) => {
     let studentsID = req.params.id;
+    try{
+        await studentValidations.validateAsync(req.id)
+    } catch(err){
+        return res.status(400).json({error: err.message});
+    }
 
     let student = await Student.findById(studentsID);
     if(!student) {
@@ -42,6 +52,13 @@ const getStudentsById = async(req, res, next) => {
 
 const getStudentsByIdAndUpdate = async(req, res, next) => {
     let studentsID = req.params.id;
+
+    try{
+        await studentValidations.validateAsync(req.id)
+    } catch(err){
+        return res.status(400).json({error: err.message});
+    }
+
     let student = await Student.findByIdAndUpdate(studentsID, {
         studentName: req.body.studentName,
         studentId: req.body.studentId,
@@ -53,14 +70,18 @@ const getStudentsByIdAndUpdate = async(req, res, next) => {
     if(!student) {
         return res.status(500).json({message: 'Cannot save student'});
     } else {
-        return res.status(200).json({student});
+        return res.status(201).json({student});
     }
 }
 
 
 const deleteStudentsById = async(req, res, next) => {
     let studentsID = req.params.id;
-
+    try{
+        await studentValidations.validateAsync(req.id)
+    } catch(err){
+        return res.status(400).json({error: err.message})
+    }
     let student = await Student.findByIdAndRemove(studentsID);
     if(!student) {
         return res.status(404).json({message: 'unable to delete student '});
