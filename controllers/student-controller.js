@@ -37,7 +37,7 @@ const addStudents =  async(req, res, next) => {
 const getStudentsById = async(req, res, next) => {
     let studentsID = req.params.id;
     try{
-        await studentValidations.validateAsync(req.id)
+        await studentValidations.validateAsync(req.params.id)
     } catch(err){
         return res.status(400).json({error: err.message});
     }
@@ -54,7 +54,7 @@ const getStudentsByIdAndUpdate = async(req, res, next) => {
     let studentsID = req.params.id;
 
     try{
-        await studentValidations.validateAsync(req.id)
+        await studentValidations.validateAsync(req.params.id)
     } catch(err){
         return res.status(400).json({error: err.message});
     }
@@ -78,7 +78,7 @@ const getStudentsByIdAndUpdate = async(req, res, next) => {
 const deleteStudentsById = async(req, res, next) => {
     let studentsID = req.params.id;
     try{
-        await studentValidations.validateAsync(req.id)
+        await studentValidations.validateAsync(req.params.id)
     } catch(err){
         return res.status(400).json({error: err.message})
     }
