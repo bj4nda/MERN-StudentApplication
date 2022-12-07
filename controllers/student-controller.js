@@ -39,7 +39,7 @@ const addStudents =  async(req, res, next) => {
 const getStudentsById = async(req, res, next) => {
     let studentsID = req.params.id;
     try{
-        await studentValidations.validateAsync(req.id)
+        await studentValidations.validateAsync()
     } catch(err){
         return res.status(400).json({error: err.message});
     }
@@ -61,7 +61,7 @@ const getStudentsByIdAndUpdate = async(req, res, next) => {
     let studentsID = req.params.id;
     
     try{
-        await studentValidations.validateAsync(req.id)
+        await studentValidations.validateAsync()
     } catch(err){
         return res.status(400).json({error: err.message});
     }
@@ -87,7 +87,8 @@ const getStudentsByIdAndUpdate = async(req, res, next) => {
 const deleteStudentsById = async(req, res, next) => {
     let studentsID = req.params.id;
     try{
-        await studentValidations.validateAsync(req.id)
+        await studentValidations.validateAsync()
+        console.log(req.params.id)
     } catch(err){
         return res.status(400).json({error: err.message})
     }
@@ -96,12 +97,8 @@ const deleteStudentsById = async(req, res, next) => {
     if(!student) {
         return res.status(404).json({message: 'unable to delete student '});
     } 
-    return res.status(200).json({message : "delete student"})    
-    try{
-        await studentValidationsDeleteById.validateAsync(student);
-    } catch(err){
-        return res.status(400).json({error: err.message})
-    }
+    return res.status(200).json({message : "deleted student"})    
+
 }
 
 exports.getStudents = getStudents;
