@@ -82,7 +82,7 @@ const getStudentsByIdAndUpdate = async(req, res, next) => {
 const deleteStudentsById = async(req, res, next) => {
     let studentsID = req.params.id;
     try{
-        await studentValidationsDeleteById.validateAsync(req.id)
+        await studentValidationsDeleteById.validateAsync(req.body)
     } catch(err){
         return res.status(400).json({error: err.message})
     }
@@ -91,7 +91,7 @@ const deleteStudentsById = async(req, res, next) => {
     if(!student) {
         return res.status(404).json({message: 'unable to delete student '});
     } 
-    return res.status(200).json({message : "delete student"})    
+    return res.status(200).json({message : "deleted student"})    
 
 }
 
