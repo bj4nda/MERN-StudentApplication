@@ -1,43 +1,49 @@
 const Joi = require('@hapi/joi');
+Joi.objectId = require('joi-objectid')(Joi)
 const Student = require('../models/Student');
 
-const studentValidations = Joi.object({
-    studentName: Joi.string().alphanum().min(3).max(30).required(),
-    studentId: Joi.number().required(),
-    studentGender: Joi.string().required().valid('male', 'female'),
-    studentResults: Joi.boolean().required(),
-    studentMobile: Joi.number().min(100000000).max(999999999).required(),
-    studentMarks: Joi.array().items(Joi.number().min(0).max(100)).required()
+const studentValidations  = Joi.object({
+    name: Joi.string().alphanum().min(3).max(30).required(),
+    Id: Joi.number().required(),
+    gender: Joi.string().required().valid('male', 'female'),
+    results: Joi.boolean().required(),
+    mobile: Joi.number().min(100000000).max(999999999).required(),
+    marks: Joi.array().items(Joi.number().min(0).max(100)).required(),
+    classId: Joi.string().required()
 })
    
 
 const studentValidationsByIdAndUpdate = Joi.object({
-    studentName: Joi.string().alphanum().min(3).max(30).required(),
-    studentId: Joi.number().required(),
-    studentGender: Joi.string().required().valid('male', 'female'),
-    studentResults: Joi.boolean().required(),
-    studentMobile: Joi.number().min(100000000).max(999999999).required(),
-    studentMarks: Joi.array().items(Joi.number().min(0).max(100)).required(),
+    name: Joi.string().alphanum().min(3).max(30).required(),
+    Id: Joi.number().required(),
+    gender: Joi.string().required().valid('male', 'female'),
+    results: Joi.boolean().required(),
+    mobile: Joi.number().min(100000000).max(999999999).required(),
+    marks: Joi.array().items(Joi.number().min(0).max(100)).required(),
+    classId: Joi.string().required()
+    
 })
 
 
 const studentValidationsGetId = Joi.object({
-    studentName: Joi.string().alphanum().min(3).max(30).required(),
-    studentId: Joi.number().required(),
-    studentGender: Joi.string().required().valid('male', 'female'),
-    studentResults: Joi.boolean().required(),
-    studentMobile: Joi.number().min(100000000).max(999999999).required(),
-    studentMarks: Joi.array().items(Joi.number().min(0).max(100)).required()
+    name: Joi.string().alphanum().min(3).max(30).required(),
+    Id: Joi.number().required(),
+    gender: Joi.string().required().valid('male', 'female'),
+    results: Joi.boolean().required(),
+    mobile: Joi.number().min(100000000).max(999999999).required(),
+    marks: Joi.array().items(Joi.number().min(0).max(100)).required(),
+    classId: Joi.string().required()
 
 })
 
 const studentValidationsDeleteById = Joi.object({
-    studentName: Joi.string().alphanum().min(3).max(30).required(),
-    studentId: Joi.number().required(),
-    studentGender: Joi.string().required().valid('male', 'female'),
-    studentResults: Joi.boolean().required(),
-    studentMobile: Joi.number().min(100000000).max(999999999).required(),
-    studentMarks: Joi.array().items(Joi.number().min(0).max(100)).required()
+    name: Joi.string().alphanum().min(3).max(30).required(),
+    Id: Joi.number().required(),
+    gender: Joi.string().required().valid('male', 'female'),
+    results: Joi.boolean().required(),
+    mobile: Joi.number().min(100000000).max(999999999).required(),
+    marks: Joi.array().items(Joi.number().min(0).max(100)).required(),
+    classId: Joi.string().required()
 
 })
 
