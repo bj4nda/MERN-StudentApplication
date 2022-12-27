@@ -1,4 +1,4 @@
-const Teacher = require('../models/Teacher');
+/* const Teacher = require('../models/Teacher');
 const _ = require('lodash');
 const bcrypt = require('bcrypt');
 const express = require('express');
@@ -36,4 +36,4 @@ router.post('/login', async(req, res) => {
         return Joi.validate(req, schema);
  }  
 
-module.exports = router;
+module.exports = router; */

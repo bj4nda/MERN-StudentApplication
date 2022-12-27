@@ -1,0 +1,20 @@
+let grandTotal = 1079
+let taxRate = 18
+let couponDiscountPercentage = 10
+
+let taxAmount = grandTotal * (taxRate / 100)
+let subtotal = grandTotal - taxAmount
+let basePrice = subtotal / (1 - (couponDiscountPercentage / 100))
+let couponDiscountAmount = basePrice * (couponDiscountPercentage / 100)
+
+let result = {
+    "basePrice": basePrice,
+    "couponDiscountPercentage": couponDiscountPercentage,
+    "couponDiscountAmount": couponDiscountAmount,
+    "subtotal": subtotal,
+    "taxRate": taxRate,
+    "taxAmount": taxAmount,
+    "grandTotal": grandTotal
+}
+
+console.log(result)

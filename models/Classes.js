@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+/* const mongoose = require('mongoose');
 
 
 const classesSchema = new mongoose.Schema({
@@ -20,7 +20,7 @@ const classesSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Student'
     }]
-  }); //one to many students
+  });  *///one to many students
 
 
 
@@ -29,8 +29,8 @@ const classesSchema = new mongoose.Schema({
     next();
   }) */
 
-const Classes = mongoose.model("Classes", classesSchema);
-module.exports = Classes;
+/* const Classes = mongoose.model("Classes", classesSchema);
+module.exports = Classes; */
 
 
 /* Classes.findOneAndUpdate({_id: res._id}, {$inc: { strength: 1 } }) */

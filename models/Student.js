@@ -1,34 +1,49 @@
 const { object } = require('@hapi/joi');
 const mongoose = require('mongoose');
-
-const StudentSchema = new mongoose.Schema({
+/* name, age, class, section, rollnumber, address, mobile, email.
+ */const StudentSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
     },
-    Id: {
+    age: {
         type: Number,
         required: true
     },
-    gender: {
-        type: String
+    Class: {
+        type: Number,
+        required: true
     },
-    results: {
-        type: Boolean
+    section: {
+        type: String,
+        required: true
+    },
+    rollnumber: {
+        type: Number,
+        required: true
+    },
+    address: {
+        type: String,
+        required: true
     },
     mobile: {
-        type: Number
+        type: Number,
+        required: true
     },
-    marks: {
-        /* type: mongoose.Schema.Types.ObjectId,
-        ref: 'Courses', */
+    email: {
+        type: String,
+        required: true
+    }
+    /* marks: {
+         type: mongoose.Schema.Types.ObjectId,
+        ref: 'Courses',
         type:  Array,
         default: []
     },
     classId : {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Classes'
-    }
+    } */
    
 });
 

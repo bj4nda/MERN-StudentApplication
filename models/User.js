@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const config = require('config');
-const teacherSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     name: {
       type: String,
       required: true,
@@ -23,11 +23,12 @@ const teacherSchema = new mongoose.Schema({
     },
     isAdmin: Boolean
   });
-// read abt oop js this where 
-teacherSchema.methods.generateAuthToken = function() {
+
+  
+/* userSchema.methods.generateAuthToken = function() {
   const token = jwt.sign({_id: this.id, isAdmin: this.isAdmin}, config.get('jwtPrivateKey'));
   return token;
 }
-
-const Teacher = mongoose.model("Teacher", teacherSchema);
-module.exports = Teacher;
+ */
+const User = mongoose.model("User", userSchema);
+module.exports = User;

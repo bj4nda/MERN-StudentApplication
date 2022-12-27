@@ -1,4 +1,4 @@
-const Joi = require('@hapi/joi');
+/* const Joi = require('@hapi/joi');
 Joi.objectId = require('joi-objectid')(Joi)
 const Teacher = require('../models/Teacher');
 
@@ -8,4 +8,4 @@ const teacherValidations  = Joi.object({
     password: Joi.string().alphanum().min(5).max(255)
     })
 
-module.exports = teacherValidations; 
+module.exports = teacherValidations;  */
