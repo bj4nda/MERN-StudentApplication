@@ -61,7 +61,7 @@ const Register = () => {
                 <TextField name = "email" type="email" onChange={handleChange} value={inputs.email} fullWidth  placeholder="Email Address" variant="outlined" />
                 </Grid>
                 <Grid item >
-                <TextField name="password" onChange={handleChange} type="password" value={inputs.password} fullWidth placeholder="Email Address" variant="outlined" />
+                <TextField name="password" onChange={handleChange} type="password" value={inputs.password} fullWidth label="Password" placeholder="Email Address" variant="outlined" />
                 </Grid>
                 <Grid item>
                 <FormControlLabel 
