@@ -5,7 +5,7 @@ import "../App.css"
 axios.defaults.withCredentials = true
 let firstRender = true;
 
-export default function AddStudent() {
+/* export default function AddStudent() {
     const [user, setUser] = useState();
     
     const refreshToken = async () => {
@@ -42,4 +42,4 @@ export default function AddStudent() {
       </div>
   );
 }
-
+ */

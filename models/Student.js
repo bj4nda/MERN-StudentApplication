@@ -33,17 +33,17 @@ const mongoose = require('mongoose');
     email: {
         type: String,
         required: true
-    }
+    },
     /* marks: {
          type: mongoose.Schema.Types.ObjectId,
         ref: 'Courses',
         type:  Array,
         default: []
-    },
-    classId : {
+    }*/
+    User : {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Classes'
-    } */
+        ref: 'User'
+    } 
    
 });
 

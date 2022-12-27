@@ -31,7 +31,7 @@ return (
                     <td>6</td>
                     <td>A</td>
                     <td>15</td>
-                    <td>{student}</td>
+                    <td>1222</td>
                     <td>10000000</td>
                     <td>Address1</td>
                 </tr>

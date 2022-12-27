@@ -49,13 +49,13 @@ const Login = () => {
                 <Avatar style={avatarStyle}><LockOutlinedIcon/></Avatar>
                 <h2>Sign In</h2>
                 </Grid>
-            <Grid container direction="column" spacing={4}>
+            <Grid container direction="column" spacing={4} sx={{padding: 5}}>
                 
                 <Grid item >
-                <TextField name = "email" type="email" onChange={handleChange} value={inputs.email} fullWidth label="Email Address" placeholder="Email Address" variant="outlined" />
+                <TextField name = "email" type="email" onChange={handleChange} value={inputs.email} fullWidth  placeholder="Email Address" variant="outlined" />
                 </Grid>
                 <Grid item >
-                <TextField name="password" onChange={handleChange} type="password" value={inputs.password} fullWidth label="Password" placeholder="Email Address" variant="outlined" />
+                <TextField name="password" onChange={handleChange} type="password" value={inputs.password} fullWidth placeholder="Email Address" variant="outlined" />
                 </Grid>
                 <Grid item>
                 <FormControlLabel 

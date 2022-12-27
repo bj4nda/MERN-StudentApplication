@@ -16,11 +16,11 @@ const admin = require('../middleware/admin'); */
 
  router.get('/', studentController.getStudents);
 
- router.post('/',  studentController.addStudents);
+ router.post('/add',  studentController.addStudents);
 
  router.get('/:email', studentController.getStudentsById);
 
-router.patch("/:email", studentController.getStudentsByIdAndUpdate);
+router.patch("/update/:email", studentController.getStudentsByIdAndUpdate);
 
  router.delete('/:email', studentController.deleteStudentsById);
 
