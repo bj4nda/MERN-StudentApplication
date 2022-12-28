@@ -21,7 +21,7 @@ const UpdateStudentList = () => {
         console.log(e.target.name, "value", e.target.value)
     }
     const sendRequest = async() => {
-        const response = await axios.post('http://localhost:5000/auth/add', {
+        await axios.post('http://localhost:5000/add', {
             name: inputs.name,
             age: inputs.age,
             Class: inputs.Class,
@@ -30,10 +30,9 @@ const UpdateStudentList = () => {
             mobile: inputs.mobile,
             email: inputs.email,
             address: inputs.address,
-        }).catch((err) => console.log(err))
-
-        const data = await response.data;
-        return data
+        }).then(() => {
+            console.log('successfully')})
+            .catch((err) => console.log(err))
     }
    
     const handleSubmit = (e) => {

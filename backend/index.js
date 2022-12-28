@@ -16,7 +16,7 @@ app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use('/students', router);
+app.use('/', router);
 app.use('/auth', router1)
 
 /* app.use('/users', router);

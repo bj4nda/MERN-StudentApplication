@@ -10,7 +10,6 @@ const getStudents = async(req, res, next) => {
             return res.status(404).json({message: 'student not found'});
         }
         res.status(200).json({students})   
-        res.render('add', {students: "students"})
     }
 /* name, age, class, section, rollnumber, address, mobile, email.*/
 

@@ -38,9 +38,9 @@ const Register = () => {
         e.preventDefault();
         console.log(inputs)
         //send http 
-        /* sendRequest().then(() => {
+        sendRequest().then(() => {
             history("/login")
-        })  */
+        }) 
     }
     const avatarStyle = {backgroundColor: 'blue'}
     return(

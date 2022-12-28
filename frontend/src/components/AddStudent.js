@@ -5,7 +5,7 @@ import "../App.css"
 axios.defaults.withCredentials = true
 let firstRender = true;
 
-/* export default function AddStudent() {
+export default function AddStudent() {
     const [user, setUser] = useState();
     
     const refreshToken = async () => {
@@ -18,7 +18,7 @@ let firstRender = true;
     }
 
     const getStudent = async() => { 
-        const res = await axios.get('http://localhost:5000/auth/user' , {
+        const res = await axios.get('http://localhost:5000/add' , {
             withCredentials: true
         }).catch(err => console.error(err)); 
         const data = await res.data;
@@ -42,4 +42,4 @@ let firstRender = true;
       </div>
   );
 }
- */
+

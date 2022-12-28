@@ -40,10 +40,10 @@ const mongoose = require('mongoose');
         type:  Array,
         default: []
     }*/
-    User : {
+    /* User : {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-    } 
+    }  */
    
 });
 

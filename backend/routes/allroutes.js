@@ -14,7 +14,7 @@ const teacherValidations = require('../validations/teacher'); */
 const admin = require('../middleware/admin'); */
 
 
- router.get('/', studentController.getStudents);
+ router.get('/all', studentController.getStudents);
 
  router.post('/add',  studentController.addStudents);
 
