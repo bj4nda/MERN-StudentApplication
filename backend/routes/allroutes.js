@@ -18,11 +18,11 @@ const admin = require('../middleware/admin'); */
 
  router.post('/add',  studentController.addStudents);
 
- router.get('/:email', studentController.getStudentsById);
+ router.get('/email', studentController.getStudentsById);
 
-router.patch("/update/:email", studentController.getStudentsByIdAndUpdate);
+router.patch("/patch", studentController.getStudentsByIdAndUpdate);
 
- router.delete('/:email', studentController.deleteStudentsById);
+ router.delete('/delete', studentController.deleteStudentsById);
 
 
 

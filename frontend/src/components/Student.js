@@ -19,8 +19,7 @@ const Student = () => {
 
 return (
     <div>
-{/*         <button onClick={getContacts}>Get students</button> 
- */}
+
         {contacts.map((val, key) => {
             return <div key={ key}> <h1>{val.name}</h1>   </div>
         })}

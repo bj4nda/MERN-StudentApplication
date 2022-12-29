@@ -25,15 +25,6 @@ const addStudents =  async(req, res, next) => {
         return res.status(400).json({error: err.message})
     }
 
-    /* const session = await mongoose.startSession();
-    session.startTransaction();  */
-          
-
-
-    /*let currentStudent = await Student.findByIdAndUpdate(email,  {$push: {currentStudent: student.id}}, {$inc: { strength: 1 }}, {session: session} ); 
-    /* await session.commitTransaction();
-    session.endSession();*/
-
     // creating instance of student model single function atomic way 
     let student = new Student({
         name: req.body.name,
@@ -43,13 +34,12 @@ const addStudents =  async(req, res, next) => {
         rollnumber: req.body.rollnumber,
         address: req.body.address,
         mobile: req.body.mobile,
-        email: req.body.email
-/*         classId: req.body.classId
- */    })
+        email: req.body.email,
+    })
 
-    /* const {name, age, Class, section, rollnumber, address, mobile, email } = req.body; */
+    const {name, age, Class, section, rollnumber, address, mobile, email } = req.body;
     try {
-    let savedStudent = await student.save(/* {session: session} */);
+    let savedStudent = await student.save();
     } catch (e) {
         console.log({message: e.message}) 
     } 
@@ -107,15 +97,15 @@ const getStudentsByIdAndUpdate = async(req, res, next) => {
 
 
 const deleteStudentsById = async(req, res, next) => {
-/*     let studentsID = req.params.id;
- */    
+    let studentsID = req.params.id;
+    
     try{
         await studentValidationsDeleteById.validateAsync(req.body)
     } catch(err){
         return res.status(400).json({error: err.message})
     }
     let student = await Student.findOneAndDelete({email: req.params.email});
-    /* const {name, age, Class, section, rollnumber, address, mobile, email } = req.body */;
+    const {name, age, Class, section, rollnumber, address, mobile, email } = req.body;
 /*     let removeOneStudent = await Classes.findByIdAndUpdate(classId,{$pull: {currentStudent: student.id}, $inc: { strength: -1 }});
  */
 

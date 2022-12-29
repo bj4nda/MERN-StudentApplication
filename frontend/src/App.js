@@ -6,6 +6,7 @@ import Register from "./components/Register";
 import { Routes, Route} from "react-router-dom"
 import { useSelector } from "react-redux";
 import UpdateStudentList from "./components/UpdateStudentList";
+import ShowStudent from "./components/ShowStudents";
 function App() {
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
   console.log(isLoggedIn)
@@ -19,7 +20,7 @@ function App() {
             <Route path = "/register" element = {<Register />} />
             <Route path = "/login" element = {<Login />} />
             <Route path = "/student/add" element = {<UpdateStudentList />} />
-            <Route path = "/student" element = {<Student/>} />
+            <Route path = "/student" element = {<ShowStudent/>} />
           </Routes>
       </main>
     </React.Fragment>

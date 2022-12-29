@@ -1,6 +1,6 @@
 import { InputLabel, Typography, TextField, Box, Button } from '@mui/material'
 import axios from 'axios'
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 const labels = {mb: 1, mt:2, fontSize: '24px', fontWeight:'bold'}
 const UpdateStudentList = () => {
     const [inputs, setInputs] = useState({
@@ -13,15 +13,16 @@ const UpdateStudentList = () => {
         email: "",
         address: "",
     })
+    
 
-    const handleChange = (e) => {
+    const handleChange = (e) => {        
         setInputs(prev => ({
-            ...prev, [e.target.name]: e.target.value
+            ...prev, [e.target.name]: e.target.value,
         }))
-        console.log(e.target.name, "value", e.target.value)
     }
-    const sendRequest = async() => {
-        await axios.post('http://localhost:5000/add', {
+
+    const createStudent = async() => {
+        const res = await axios.post('/add', {
             name: inputs.name,
             age: inputs.age,
             Class: inputs.Class,
@@ -30,25 +31,27 @@ const UpdateStudentList = () => {
             mobile: inputs.mobile,
             email: inputs.email,
             address: inputs.address,
-        }).then(() => {
-            console.log('successfully')})
-            .catch((err) => console.log(err))
+        }).catch((error) => {console.log(error)})
+        const data = await res.data
+        return data;
     }
+    
    
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(inputs)
-        sendRequest().then((data) => {
-            console.log(data)
+            createStudent().then((data) => {
+            console.log(data) 
         })
     }
+ 
 
 
   return (
     <div>
         <form onSubmit={handleSubmit}>
-            <Box border={3} borderColor="white" borderRadius={5} boxShadow="10px 10px 20px #ccc" padding={3} margin={3} display='flex' flexDirection={"column"} width={"80%"}>
-                <Typography fontWeight={'bold'} padding={2} color='grey' variant='h6'>Add new students</Typography>
+            <Box border={3} borderColor="white" borderRadius={5} boxShadow="10px 10px 20px #ccc" padding={5} margin={5} display='flex' justifyContent="center" flexDirection={"column"} width={"100%"}>
+                <Typography fontWeight={'bold'}  color='grey' variant='h4'>Add new students</Typography>
                 <InputLabel sx={labels}>name</InputLabel>
                 <TextField name="name" onChange={handleChange} value={inputs.name} margin='auto' variant='outlined'/>
                 <InputLabel sx={labels}>age</InputLabel>
@@ -65,7 +68,9 @@ const UpdateStudentList = () => {
                 <TextField name="mobile" onChange={handleChange} value={inputs.mobile} margin='auto' variant='outlined'/>
                 <InputLabel sx={labels}>address</InputLabel>
                 <TextField name="address" onChange={handleChange} value={inputs.address} margin='auto' variant='outlined'/>
-                <Button type="submit" sx={{mt:2, borderRadius: 2}} variant="contain" >Submit </Button> 
+                <Box display="flex" justifyContent="center" padding={3}>
+                <Button type="submit" sx={{mt:2, borderRadius: 2}} variant="contained" color="primary" >Submit </Button> 
+                </Box>
             </Box>
         </form>
     </div>
