@@ -1,8 +1,10 @@
 import { InputLabel, Typography, TextField, Box, Button } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 const labels = {mb: 1, mt:2, fontSize: '24px', fontWeight:'bold'}
-const UpdateStudentList = () => {
+
+const AddStudentList = () => {
     const [inputs, setInputs] = useState({
         name: "",
         age: "",
@@ -22,7 +24,7 @@ const UpdateStudentList = () => {
     }
 
     const createStudent = async() => {
-        const res = await axios.post('/add', {
+            await axios.post('/add', {
             name: inputs.name,
             age: inputs.age,
             Class: inputs.Class,
@@ -32,20 +34,18 @@ const UpdateStudentList = () => {
             email: inputs.email,
             address: inputs.address,
         }).catch((error) => {console.log(error)})
-        const data = await res.data
-        return data;
+        
     }
     
-   
-    const handleSubmit = (e) => {
+    const navigate = useNavigate();
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(inputs)
-            createStudent().then((data) => {
-            console.log(data) 
-        })
+        await createStudent()
+        navigate("/student");
     }
  
-
+    
 
   return (
     <div>
@@ -68,13 +68,11 @@ const UpdateStudentList = () => {
                 <TextField name="mobile" onChange={handleChange} value={inputs.mobile} margin='auto' variant='outlined'/>
                 <InputLabel sx={labels}>address</InputLabel>
                 <TextField name="address" onChange={handleChange} value={inputs.address} margin='auto' variant='outlined'/>
-                <Box display="flex" justifyContent="center" padding={3}>
                 <Button type="submit" sx={{mt:2, borderRadius: 2}} variant="contained" color="primary" >Submit </Button> 
-                </Box>
             </Box>
         </form>
     </div>
   )
   }
 
-export default UpdateStudentList
+export default AddStudentList

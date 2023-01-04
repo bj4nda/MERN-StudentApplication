@@ -7,7 +7,7 @@ import { Grid, Container, Paper, TextField, Button, Avatar,  } from '@mui/materi
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 const Login = () => {
-    const history = useNavigate();
+    const navigate = useNavigate();
     const [inputs, setInputs] = useState({
         email: "",
         password: ""
@@ -35,7 +35,7 @@ const Login = () => {
         console.log(inputs)
         //send http 
         sendRequest().then(() => {
-            history("/add")
+            navigate("/student")
         })
     }
     const avatarStyle = {backgroundColor: 'blue'}
@@ -55,7 +55,7 @@ const Login = () => {
                 <TextField name = "email" type="email" onChange={handleChange} value={inputs.email} fullWidth  placeholder="Email Address" variant="outlined" />
                 </Grid>
                 <Grid item >
-                <TextField name="password" onChange={handleChange} type="password" value={inputs.password} fullWidth placeholder="Email Address" variant="outlined" />
+                <TextField name="password" onChange={handleChange} type="password" value={inputs.password} fullWidth placeholder="Password" variant="outlined" />
                 </Grid>
                 <Grid item>
                 <FormControlLabel 

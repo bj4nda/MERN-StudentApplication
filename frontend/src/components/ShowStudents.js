@@ -12,46 +12,42 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
+  export default function ShowStudent() {
+      
+    const [studentList, setStudentList] = useState([]);
+    
+    let handleDelete = async (_id)=> {
+      try {
+        await axios.delete(`http://localhost:5000/delete/${_id}`);
+        getStudentList();
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    
+    const getStudentList = async () => {
+      const res = await axios.get('http://localhost:5000/all');
+      setStudentList(res.data.students)
+      
+    }     
+    const navigate = useNavigate();
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+      navigate("/add"); 
+    };
+    
+    useEffect(() => {
+      getStudentList();
+    },[]);
 
 
-
-/* name: "",
-        age: "",
-        Class: "",
-        section: "",
-        rollnumber: "",
-        mobile: "",
-        email: "",
-        address: "",; */
-
-export default function ShowStudent() {
-
-  const [studentList, setStudentList] = useState([]);
- /*  const [newStudent, setNewStudent] = useState([]); */
-
-  const getStudentList = async () => {
-    const res = await axios.get('http://localhost:5000/all');
-    setStudentList(res.data.students)
-}
-/*   const deleteStudent = (email) => {
-    axios.delete(`http://localhost:5000/delete`).then(() => {
-      console('deleteStudent')
-  })
-}
-  const editStudent = async (id) => {
-    const res = await axios.patch(`http://localhost:5000/patch`);
-    setNewStudent(res.data.student, id);
-}
- */
-  useEffect(() => {
-    getStudentList();
-  },[]);
-
-  console.log('allStudents')
   return (
     <TableContainer component={Paper} style={{ paddingTop: 20, paddingRight: 10  }}>
       <Box display="flex" justifyContent="flex-end" padding={2}>
-      <Button variant="outlined" color="primary" /* onClick={} */>
+      <Button variant="outlined" color="primary" onClick={handleSubmit}>
                 Add Student
       </Button>
       </Box>
@@ -73,7 +69,7 @@ export default function ShowStudent() {
         <TableBody>
           {studentList.map((student, key) => (
             <TableRow
-              key={key}
+              key={student._id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
@@ -88,13 +84,13 @@ export default function ShowStudent() {
               <TableCell align="right">{student.mobile}</TableCell>
               <TableCell align="right">{student.address}</TableCell>
               <TableCell align="right"> 
-              <IconButton aria-label="edit">
+              <IconButton aria-label="edit" component={Link} to={{pathname:`/patch/${student._id}`}}>
                 <EditIcon color="primary" />
               </IconButton>
               </TableCell>
               <TableCell align="right"> 
-              <IconButton aria-label="delete"> 
-                <DeleteIcon fontSize="small"/> 
+              <IconButton aria-label="delete" onClick={() => handleDelete(student._id)}> 
+                <DeleteIcon fontSize="small"/ > 
               </IconButton>
               </TableCell>
             </TableRow>

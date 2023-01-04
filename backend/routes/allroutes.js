@@ -2,29 +2,24 @@ const express = require('express');
 const Student = require('../models/Student');
 const router = express.Router();
 const studentController = require('../controllers/student-controller')
-/* const classController = require('../controllers/class-controller')
-const teachercontroller = require('../controllers/teacher-controller') */
-/* const userController = require('../controllers/user-controller')
- */const studentValidations = require('../validations/students');
+const userController = require('../controllers/user-controller')
+const studentValidations = require('../validations/students');
 const {validate} = require('express-validation');
-/* const Classes = require('../models/Classes');
-const Teacher = require('../models/Teacher');
-const teacherValidations = require('../validations/teacher'); */
-/* const auth = require("../middleware/auth");
-const admin = require('../middleware/admin'); */
+const auth = require("../middleware/auth");
+const admin = require('../middleware/admin');
 
 
  router.get('/all', studentController.getStudents);
 
  router.post('/add',  studentController.addStudents);
 
- router.get('/email', studentController.getStudentsById);
+ router.get('/:_id', studentController.getStudentsById);
 
-router.patch("/patch", studentController.getStudentsByIdAndUpdate);
+router.patch("/patch/:_id", studentController.getStudentsByIdAndUpdate);
 
- router.delete('/delete', studentController.deleteStudentsById);
+ router.delete('/delete/:_id', studentController.deleteStudentsById);
 
-
+// 
 
 /* router.post('/addClass', classController.updateClass);
 

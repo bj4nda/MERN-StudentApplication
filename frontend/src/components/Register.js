@@ -7,7 +7,7 @@ import { Grid, Container, Paper, TextField, Button, Avatar, Link } from '@mui/ma
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 const Register = () => {
-    const history = useNavigate();
+    const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const [inputs, setInputs] = useState({
@@ -39,7 +39,7 @@ const Register = () => {
         console.log(inputs)
         //send http 
         sendRequest().then(() => {
-            history("/login")
+            navigate("/login")
         }) 
     }
     const avatarStyle = {backgroundColor: 'blue'}
@@ -77,7 +77,7 @@ const Register = () => {
                     <Button onClick={handleChange} fullWidth variant="contained"  type="submit" color="primary">Sign In</Button>
                 </Grid>
                 <Grid item>
-                    <Button onChange={() => setIsLoggedIn(!isLoggedIn)}> Change to {isLoggedIn ? "Login" : "Register"} </Button>
+                    <Button onChange={() => setIsLoggedIn(!isLoggedIn)}> Change to {isLoggedIn? "Login" : "Register"} </Button>
                 </Grid>
                 <Grid item>
                     <Typography> 
