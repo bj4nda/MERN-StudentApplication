@@ -39,6 +39,19 @@ const registerUser = async (req, res) => {
  exports.registerUser = registerUser; 
  */
 
+ const getAllusers = async(req, res, next) => {
+   let users;
+   try{
+      users = await User.find();
+   }catch(err){
+      console.log(err);
+   }
+
+   if(!users){
+      return res.status(404).json({message: "No users found"})
+   }
+   return res.status(200).json({users})
+ }
 
 const register = async(req, res, next) => {
    let existingUser;
@@ -47,7 +60,7 @@ const register = async(req, res, next) => {
    try{
       existingUser = await User.findOne({email: email});
    } catch (err) {
-      console.log(err);
+      return console.log(err);
    }
 
    if(existingUser) {
@@ -58,10 +71,11 @@ const register = async(req, res, next) => {
    const salt = bcrypt.genSaltSync(10);
 
    const hashedPassword = bcrypt.hashSync(password, salt)
+
    const user = new User({
       name,
+      email,
       password: hashedPassword,
-      email
    })
 
    try{
@@ -69,7 +83,7 @@ const register = async(req, res, next) => {
    } catch(err) {
       console.log(err)
    }
-   return res.status(200).json({message: user})
+   return res.status(200).json({ user})
 }
 
 const login = async(req, res, next) => { 
@@ -85,21 +99,28 @@ const login = async(req, res, next) => {
    if(!existingUser) {
       return res.status(200).json({message: "No user found. Register here."});
    }
-   const isPasswwordCorrect = bcrypt.compare(password, existingUser.password);
+   const isPasswwordCorrect = bcrypt.compareSync(password, existingUser.password);
    if(!isPasswwordCorrect) {
-     return res.status(400).json({message: "Invalid password."}); 
+     return res.status(400).json({message: "Invalid email/password"}); 
    }
 
-   const token = jwt.sign({id: existingUser._id}, JWT_SECRET, {
+   const token = jwt.sign({_id: existingUser._id}, JWT_SECRET, {
       expiresIn: "300s"
    })
 
+   console.log("gen token\n", token);
+
+   /* if(req.cookie[`${existingUser._id}`]) {
+      req.cookie[`${existingUser._id}`] = ""
+   } */
+
    res.cookie(String(existingUser._id), token, {
       path: "/",
-      expires: new Date(Date.now() + 1000 * 30),
+      expires: new Date(Date.now() + 1000 * 300),
       httpOnly: true,
       sameSite: 'lax',
    })
+   
 
 
    return res.status(200).json({message:"Success logged in.", user: existingUser, token});
@@ -109,8 +130,9 @@ const login = async(req, res, next) => {
 const verifyToken = (req, res, next) => {
 
    const cookies = req.headers.cookie;
+   console.log("ffffffffffffffffffffffffffffffffffffffffff" , cookies);
    const token = cookies.split("=")[1]
-   console.log(token);
+   console.log("sdgsdfgdsdsddddddddddddddddddddddddd" ,token);
   
    if(!token) {
       return res.status(404).json({ message:"No token found" });
@@ -119,17 +141,17 @@ const verifyToken = (req, res, next) => {
       if(err) {
          return res.status(400).json({ message: "Invalid token" });
       } 
-      console.log(user.id);
-      req.id =user.id
+      console.log("lllllllllllllllllllllllllllllllllll", user._id);
+      req._id = user._id
    })
    next();
 }
 
 
 const getUser = async (req, res, next) => {
-   const userId = req.id;
+   const userId = req._id;
    let user;
-
+   console.log("edfsfzzzzzzzzzzzzzzzasdfasd", userId)
    try {
       user = await User.findById(userId, "-password");
    } catch (err) {
@@ -145,34 +167,57 @@ const getUser = async (req, res, next) => {
 const refreshToken = async (req, res, next) => {
    const cookies = req.headers.cookie;
    const prevToken = cookies.split("=")[1]
-   if(!token) {
+   if(!prevToken) {
       return res.status(400).json({message: "invalid token"})
    }
    jwt.verify(String(prevToken), JWT_SECRET, (err, user) => {
       if(err) {
          return res.status(403).json({message: "Authentication failed"})
       }
+      console.log("ref token\n", token)
+      res.clearCookie(`${user._id}`);
+      req.cookie[`${user._id}`] = "";
 
-      res.clearCookie(`${user.id}`);
-      req.cookie[`${user.id}`] = "";
-
-      const token = jwt.sign({id: user.id}, JWT_SECRET, {
-         expiresIn: "300s"
+      
+      const token = jwt.sign({_id: user._id}, JWT_SECRET, {
+         expiresIn: "200s"
       })
-      res.cookie(String(user.id), token, {
+      res.cookie(String(user._id), token, {
          path: "/",
-         expires: new Date(Date.now() + 1000 * 30),
+         expires: new Date(Date.now() + 1000 * 300),
          httpOnly: true,
          sameSite: 'lax',
       })
 
-      req.id = user.id;
+      req._id = user._id;
       next();
    })
 
 }
+
+
+const logout = (req, res, next) => {
+   const cookies = req.headers.cookie;
+   const prevToken = cookies.split("=")[1]
+   if(!prevToken) {
+      return res.status(400).json({message: "invalid token"})
+   }
+   jwt.verify(String(prevToken), JWT_SECRET, (err, user) => {
+      if(err) {
+         return res.status(403).json({message: "Authentication failed"})
+      }
+      console.log("ref token\n", token)
+      res.clearCookie(`${user._id}`);
+      req.cookie[`${user._id}`] = "";
+      return res.status(200).json({message: "logged out successfully"});
+   })
+   
+}
+
+exports.getAllusers = getAllusers;
 exports.register = register;
 exports.login = login;
 exports.verifyToken = verifyToken;
 exports.getUser = getUser;
 exports.refreshToken = refreshToken;
+exports.logout = logout;

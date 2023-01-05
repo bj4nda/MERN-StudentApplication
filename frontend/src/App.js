@@ -1,13 +1,14 @@
 import React from "react";
 import Header from "./components/Header";
 import Login from "./components/Login";
-/* import Student from "./components/Student";
- */import Register from "./components/Register";
+import Register from "./components/Register";
+/* import Auth from "./components/Auth"; */
 import { Routes, Route} from "react-router-dom"
 import { useSelector } from "react-redux";
 import AddStudentList from "./components/AddStudentList";
 import ShowStudent from "./components/ShowStudents";
 import EditStudentList from "./components/EditStudent";
+import AddUser from "./components/AddUser";
 function App() {
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
   console.log(isLoggedIn) //localstorage in browser and token and save check token in localStorage
@@ -18,16 +19,18 @@ function App() {
       </header>
       <main>  
           <Routes>
-            <Route path = "/register" element = {<Register />} />
+           <Route path = "/register" element = {<Register />} />
+            <>
             <Route path = "/login" element = {<Login />} />
-            <Route path = "/student" element = {<ShowStudent/>} />
+            {isLoggedIn && <Route path = "/student" element = {<ShowStudent/>} />}
             <Route path = "/add" element = {<AddStudentList />} />
             <Route path = "/patch/:_id" element = {<EditStudentList />} />
+            <Route path = "/AddUser/:id" element = {<AddUser />} />
+            </>
           </Routes>
       </main>
     </React.Fragment>
   );
 }
-//props to update route  <Avatar createnew={true} />
-// finone fetxh ad update api send params to cover
+
 export default App;
