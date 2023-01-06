@@ -4,8 +4,7 @@ const config = require('config');
 const userSchema = new mongoose.Schema({
     name: {
       type: String,
-      required: false,
-      
+      required: false
     },
     email: {
       type: String,
@@ -24,10 +23,6 @@ const userSchema = new mongoose.Schema({
   });
 
   
-/* userSchema.methods.generateAuthToken = function() {
-  const token = jwt.sign({_id: this.id, isAdmin: this.isAdmin}, config.get('jwtPrivateKey'));
-  return token;
-}
- */
+
 const User = mongoose.model("User", userSchema);
 module.exports = User;

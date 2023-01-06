@@ -1,29 +1,28 @@
-import React, {useState} from "react";
-import axios from "axios";
-import { useDispatch } from "react-redux";
-import {useNavigate} from "react-router-dom";
-import {FormControlLabel} from "@mui/material";
-import {Checkbox} from "@mui/material";
-import {Grid, Container, Paper, TextField, Button, Avatar} from "@mui/material";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { authActions } from '../store';
+import React, {useState} from "react"
+import axios from "axios"
+import {useDispatch} from "react-redux"
+import {useNavigate} from "react-router-dom"
+import {FormControlLabel} from "@mui/material"
+import {Checkbox} from "@mui/material"
+import {Grid, Container, Paper, TextField, Button, Avatar} from "@mui/material"
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined"
+import {authActions} from "../store"
 
 const Login = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
-  });
+  })
 
   const handleChange = e => {
     setInputs(prev => ({
       ...prev,
       [e.target.name]: e.target.value,
-    }));
-    console.log(e.target.name, "value", e.target.value);
-  };
+    }))
+  }
 
   const sendRequest = async () => {
     const res = await axios
@@ -32,20 +31,18 @@ const Login = () => {
         password: inputs.password,
       })
       .catch(err => {
-        console.log(err);
-      });
-    const data = await res.data;
-    return data;
-  };
+        console.log(err)
+      })
+    const data = await res.data
+    return data
+  }
   const handleSubmit = e => {
-    e.preventDefault();
-    console.log(inputs);
-    //send http
+    e.preventDefault()
     sendRequest()
       .then(() => dispatch(authActions.login()))
-      .then(() => navigate("/student"));
-  };
-  const avatarStyle = {backgroundColor: "blue"};
+      .then(() => navigate("/student"))
+  }
+  const avatarStyle = {backgroundColor: "blue"}
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -111,7 +108,7 @@ const Login = () => {
         </Container>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

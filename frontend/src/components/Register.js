@@ -1,8 +1,7 @@
-import React, {useState} from "react";
-import axios from "axios";
-import {useNavigate} from "react-router-dom";
-import {FormControlLabel, Typography} from "@mui/material";
-import {Checkbox} from "@mui/material";
+import React, {useState} from "react"
+import axios from "axios"
+import {useNavigate} from "react-router-dom"
+import { Typography} from "@mui/material"
 import {
   Grid,
   Container,
@@ -11,28 +10,26 @@ import {
   Button,
   Avatar,
   Link,
-} from "@mui/material";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+} from "@mui/material"
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined"
 
 const Register = () => {
-  const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate()
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   const [inputs, setInputs] = useState({
     name: "",
     email: "",
     password: "",
-  });
+  })
 
   const handleChange = e => {
     setInputs(prev => ({
       ...prev,
       [e.target.name]: e.target.value,
-    }));
-    console.log(e.target.name, "value", e.target.value);
-  };
-/*   const [isLogIn, setIsLogIn] = useState(false);
- */
+    }))
+  }
+  
   const sendRequest = async () => {
     const res = await axios
       .post(`http://localhost:5000/auth/register`, {
@@ -41,19 +38,17 @@ const Register = () => {
         password: inputs.password,
       })
       .catch(err => {
-        console.log(err);
-      });
-    const data = await res.data;
-    return data;
-  };
+        console.log(err)
+      })
+    const data = await res.data
+    return data
+  }
   const handleSubmit = e => {
-    e.preventDefault();
-    console.log(inputs);
-    //send http
-    sendRequest().then(() => navigate("/login"));
-  };
+    e.preventDefault()
+    sendRequest().then(() => navigate("/login"))
+  }
 
-  const avatarStyle = {backgroundColor: "blue"};
+  const avatarStyle = {backgroundColor: "blue"}
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -105,15 +100,12 @@ const Register = () => {
                     value={inputs.password}
                     fullWidth
                     label="Password"
-                    placeholder="Email Address"
+                    placeholder="Password"
                     variant="outlined"
                   />
                 </Grid>
                 <Grid item>
-                  <FormControlLabel
-                    control={<Checkbox name="checked" color="primary" />}
-                    label="Remember me"
-                  />
+                 
                 </Grid>
                 <Grid item>
                   <Button
@@ -127,10 +119,7 @@ const Register = () => {
                   </Button>
                 </Grid>
                 <Grid item>
-                  <Button onChange={() => setIsLoggedIn(!isLoggedIn)}>
-                    {" "}
-                    Change to {isLoggedIn ? "Login" : "Register"}{" "}
-                  </Button>
+                 
                 </Grid>
                 <Grid item>
                   <Typography>
@@ -148,7 +137,7 @@ const Register = () => {
         </Container>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default Register;
+export default Register
